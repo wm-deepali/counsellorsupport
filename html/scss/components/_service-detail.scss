@@ -1,0 +1,96 @@
+@mixin title {
+    .title{
+        color: $primary;
+        font-family: $Poppins;
+        border-bottom: 2px solid $primary;
+        margin-bottom: 1em;
+    }
+}
+.serv-detail-section{
+    padding: 3em 0em;
+    .service{
+        margin-bottom: 3em;
+        border-bottom: 1px solid $primary;
+        .title{
+            font-size: 30px;
+            color: $primary;
+            border-bottom: 2px solid $primary;
+            margin-bottom: 30px;
+            font-family: $Poppins;
+        }
+        .image{
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .detail{
+            p{
+                text-align: justify;
+                font-family: $Poppins;
+            }
+        }
+    }
+    .feedback{
+        h4{
+            font-family: $Playball;
+            color: $grey-l;
+        }
+        .form-group{
+            label{
+                color: $grey-l;
+                font-family: $Poppins;
+                font-size: 13px;
+            }
+            .form-control{
+                border-radius: 0px;
+            }
+        }
+        .send-btn{
+            border: 1px solid $primary;
+            border-radius: 20px;
+            padding: 5px 20px;
+            font-size: 13px;
+            font-weight: bold;
+            background: $primary;
+            color: $white;
+            text-transform: uppercase;
+        }
+    }
+    .related{
+        padding: 0px 30px;
+        margin-bottom: 3em;
+        @include title();
+        ul{
+            li{
+                margin-bottom: 12px;
+                a{
+                    text-decoration: none;
+                    .media{
+                        img{
+                            width: 70px;
+                        }
+                        .media-body{
+                            margin-left: 12px;
+                            h6{
+                                margin-bottom: 0px;
+                                color: $primary;
+                                font-family: $Nunito;
+                            }
+                            p{
+                                font-size: 14px;
+                                line-height: 15px;
+                                color: $grey-l;
+                                margin-bottom: 0px;
+                                font-family: $Roboto;
+                                font-weight: 100;
+                            }
+                            span{
+                                font-size: 13px;
+                                color: $grey-l;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

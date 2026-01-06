@@ -1,0 +1,52 @@
+/* condition page */
+.content-section {
+    padding: 3rem 0rem; }
+    .content-section .heading {
+      text-align: center; }
+      .content-section .heading .text {
+        color: #333;
+        font-family: "Ubuntu", sans-serif;
+        margin-bottom: 30px; }
+    .content-section .data p {
+      text-align: justify;
+      font-family: "Quicksand", sans-serif; }
+
+
+      /* Home page Quotation section */
+      .quotation-section {
+        padding: 3em 0em;
+        background: rgba(115, 184, 184, 0.1); }
+        .quotation-section .quot-image {
+          text-align: right; }
+          .quotation-section .quot-image img {
+            border-radius: 20px; }
+        .quotation-section .quot-text {
+          display: grid;
+          height: 100%;
+          place-items: center;
+          background: #fff;
+          border-radius: 20px; }
+          .quotation-section .quot-text .text {
+            padding: 20px;
+            width: 640px; }
+            .quotation-section .quot-text .text h4 {
+              font-family: "Playball", cursive; }
+            .quotation-section .quot-text .text span {
+              font-family: "Roboto", sans-serif;
+              font-size: 12px;
+              font-style: oblique; }
+
+              /* Quotation COVID19 */
+              
+.covid {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  font-family: "Poppins", sans-serif;
+  text-align: center; }
+  .covid .toast-header {
+    background: rgba(87, 141, 141, 0.4);
+    color: #578d8d; }
+  .covid .toast-body .image img {
+    margin-bottom: 15px; }

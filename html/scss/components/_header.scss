@@ -1,0 +1,150 @@
+header {
+	.top-section {
+		background: $primary;
+		.social-icon {
+			ul {
+				padding: 0;
+				margin: 0;
+				list-style: none;
+				li {
+					display: inline-block;
+					color: $white;
+					font-family:$Poppins;
+					a {
+						font-size: 14px;
+    					display: inline-block;
+    					border-right: 1px solid rgba(255, 255, 255, 0.21);
+    					line-height: 18px;
+    					padding: 7px 10px;
+    					font-weight: 300;
+    					color: $white;
+					}
+				}
+			}
+		}
+		.top-menu {
+			float: right;
+			ul {
+				padding: 0;
+				margin: 0;
+				list-style: none;
+				li {
+					display: inline-block;
+					&.active {
+						a {
+							background: #e4794d;
+						}
+					}
+					a {
+						font-size: 14px;
+    					display: inline-block;
+    					border-right: 1px solid rgba(255, 255, 255, 0.21);
+    					line-height: 18px;
+    					padding: 7px 10px;
+    					font-weight: 300;
+    					color: $white;
+						font-family:$Poppins;
+					}
+				}
+			}
+		}
+	}
+	.middle-section {
+		padding: 1em 0;
+		.call-mid {
+			.media {
+				i {
+					font-size: 2em;
+					font-size: 1.3em;
+					color: $white;
+					padding: 10px;
+					background: $primary-l;
+				}
+				.media-body {
+					h5 {
+						font-size: 14px;
+    					line-height: 20px;
+						color: $grey-l;
+    					margin-bottom: 0;
+    					font-family: $Poppins;
+					}
+					h3 {
+						font-size: 19px;
+    					line-height: 22px;
+    					font-weight: 700;
+						font-family: $Poppins;
+						color: $primary-d;
+    					margin-bottom: 0;
+					}
+				}
+			}
+		}
+		.nav-logo {
+			text-align: center;
+			img {
+				height: 55px;
+			}
+		}
+		.appoint-mid {
+			.media {
+				text-align: right;
+				i {
+					font-size: 2em;
+					font-size: 1.3em;
+					color: $white;
+					padding: 10px;
+					background: $primary-l;
+				}
+				.media-body {
+					h5 {
+						font-size: 14px;
+    					line-height: 20px;
+						a {
+							color: $grey-l;
+							&:hover {
+								text-decoration:none;
+							}
+						}
+    					margin-bottom: 0;
+    					font-family: $Poppins;
+					}
+					h3 {
+						font-size: 19px;
+    					line-height: 22px;
+    					font-weight: 700;
+						font-family: $Poppins;
+						a {
+							color: $primary-d;
+							&:hover {
+								text-decoration:none;
+							}
+						}
+    					margin-bottom: 0;
+					}
+				}
+			}
+		}
+	}
+	.navigation {
+		background: $whitish;
+		border: 1px solid rgba(0,0,0,.08);
+		.navbar {
+			padding: 0;
+			.navbar-nav {
+				> li {
+					a {
+						font-family: $Poppins;
+						padding: 12px 17px !important;
+						font-size: 1em;
+					}
+					.dropdown-menu {
+						    border-radius: 0;
+						a {
+							padding: 4px 17px !important;
+						}
+					}
+				}
+			}
+		}
+	}
+}

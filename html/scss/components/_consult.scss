@@ -1,0 +1,183 @@
+.consult-page-section{
+    background: #578d8d;
+    .guid{
+        padding: 8px 0px;
+        display: flex;
+        height: 100%;
+        place-items: center;
+        h2{
+            color: $white;
+			    font-size: 23px;
+            margin: 0px;
+            font-family: $Roboto;
+        }
+        ul{
+            display: flex;
+            text-align: center;
+            margin: 0px;
+            li{
+                font-size: 13px;
+                padding: 0px 10px;
+                    line-height: normal;
+				color: $white;
+                width: 165px;
+                position: relative;
+                &::before{
+                    content: '';
+                    position: absolute;
+                    right: -15%;
+                    top: 50%;
+                    width: 39%;
+                    border-bottom: 1px solid $whitish;
+                }
+                &::after{
+                    content: '\f054';
+                    font-family: "Font Awesome 5 Free";
+                    font-weight: 900;
+                    position: absolute;
+                    font-size: 14px;
+                    right: -3%;
+                    top: 34%;
+                    width: 26px;
+                    height: 26px;
+                    padding: 4px;
+                    border-radius: 50%;
+                    border: 1px solid $whitish;
+                    background: $primary;
+                    color:$whitish;
+                }
+                &:nth-last-child(1){
+                    &::before, &::after{
+                        display: none;
+                    }
+                }
+                span{
+                    color: $white;
+                    display: block;
+                }
+                i{
+                    font-size: 30px;
+                    color: $whitish;
+                }
+            }
+        }
+    }
+}
+.modal-consult {
+	background: $primary;
+	h3 {
+		color: $white;
+    	margin: 0;
+    	font-size: 1.2em;
+	}
+}
+.btn-vd {
+				display: inline-block;
+    			padding: 3px 10px;
+				background: $primary-d;
+    			border: 1px solid $primary-d;
+    			margin-top: 15px;
+    			color: $white;
+    			border-radius: 3px;
+	&:hover {
+		color:$white;
+	}
+			}
+// Doctor section ---
+.doctor-section{
+    padding: 3em 0em;
+    background: $whitish;
+    .doctor{
+        display: flex !important;
+        padding: 30px;
+        background: $white;
+        border-radius: 10px;
+        .image{
+            img{
+                border-radius: 50%;
+            }
+        }
+        .text{
+            padding-left: 20px;
+            display: grid;
+            place-items: center;
+            h5{
+                color: $primary;
+                margin: 0px;
+            }
+            strong{
+                display: block;
+                opacity: .7;
+            }
+            p{
+                font-size: 13px;
+                opacity: .7;
+            }
+        }
+        .book{
+            padding-left: 20px;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            .body{
+                width: 165px;
+                h6{
+                    font-size: 20px;
+                    margin: 0px;
+                }
+                a{
+                    color: $white;
+                    padding: 5px 10px;
+                    text-decoration: none;
+                    border: 1px solid $primary;
+                    background: $primary;
+                    display: block;
+                    margin-top: 20px;
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}
+// faq section
+.faq-section{
+    padding: 3em 0em;
+    .title{
+        margin-bottom: 50px;
+        h4{
+            color: $primary;
+            position: relative;
+            &::before{
+                content: '';
+                position: absolute;
+                bottom: -3px;
+                width: 100px;
+                border-bottom: 2px solid $primary;
+            }
+        }
+    }
+    .faq-image{
+        img{
+            border-radius: 50%;
+            box-shadow: 0px 0px 13px 0px transparentize($color: $primary, $amount: .8);
+        }
+    }
+    .accrodion{
+        .card{
+            margin-bottom: 20px;
+            border: 1px solid $primary;
+            .card-header{
+                padding: 5px 20px;
+                h5{
+                    button{
+                        padding: 0px;
+                        color: $primary;
+                    }
+                }
+            }
+            .card-body{
+                font-size: 14px;
+            }
+        }
+    }
+}

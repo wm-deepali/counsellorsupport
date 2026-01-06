@@ -1,0 +1,80 @@
+.services-page-section{
+    padding: 3em 0em;
+    .services-main{
+        padding: 25px;
+        margin: 12px;
+        border: 5px solid transparent;
+        text-align: center;
+        box-shadow: 0px 0px 40px 0px #f1f1f1;
+        position: relative;
+        &::before{
+            content: '';
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 50%;
+            height: 50%;
+            border-top: 5px solid transparent;
+            border-right: 5px solid transparent;
+            background: transparent;
+        }
+        &::after{
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: -5px;
+            width: 50%;
+            height: 50%;
+            border-left: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            background: transparent;
+        }
+        &:hover{
+            border: 5px solid $primary;
+           &::before{
+                border-top: 5px solid $white;
+                border-right: 5px solid $white;
+            }
+            &::after{
+                border-bottom: 5px solid $white;
+                border-left: 5px solid $white;
+            }
+            .service-text{
+                a{
+                    background: transparentize($color: $primary, $amount: .1);
+                    color: transparentize($color: $white, $amount: .6);
+                }
+            }
+        }
+        .service-img{
+            img{
+                width: 140px;
+                border-radius: 50%;
+                margin-bottom: 20px;
+            }
+        }
+        .service-text{
+            h5{
+                color: $primary;
+            }
+            p{
+                font-size: 15px;
+                line-height: 20px;
+                opacity: .7;
+            }
+            a{
+                color: $primary;
+                text-decoration: none;
+                border: 2px solid $primary;
+                padding: 5px 15px;
+                border-radius: 20px;
+                margin-top: 20px;
+                transition: .8s all ease;
+                &:hover{
+                    background: $primary;
+                    color: $white;
+                }
+            }
+        }
+    }
+}

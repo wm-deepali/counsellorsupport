@@ -1,0 +1,88 @@
+.detail-page-section{
+    padding: 3em 0em;
+	.content {
+		h4 {
+			background: #556868;
+			color: $white;
+			margin: 0;
+    		padding: 5px;
+    		border-radius: 10px 10px 0px 0px;
+    		font-family: 'Nunito';
+    		text-align: center;
+		}
+		table {
+			background: $whitish;
+			tr {
+				strong {
+					font-family: $Nunito;
+				}
+				td {
+					&.data {
+						img {
+							height: 100px;
+						}
+					}
+				}
+			}
+		}
+	}
+	.payment {
+		h4 {
+			background: #556868;
+			color: $white;
+			margin: 0;
+    		padding: 5px;
+    		border-radius: 10px 10px 0px 0px;
+    		font-family: 'Nunito';
+    		text-align: center;
+		}
+		table {
+			background: $whitish;
+			tr {
+				strong {
+					font-family: $Nunito;
+				}
+				td {
+					&.data {
+						img {
+							height: 100px;
+						}
+					}
+				}
+			}
+		}
+		.payment-button {
+			.pay-btn {
+				width: 100%;
+    			background: $primary;
+    			border: 1px solid $primary-d;
+    			color: $white;
+    			border-radius: 3px;
+    			padding: 4px;
+				vertical-align: unset;
+    			font-size: 17px;
+				&:hover {
+					background: $primary-d;
+					color: $white;
+				}
+			}
+		}
+	}
+}
+.payment-modal {
+	.border-1r {
+		border-right: 1px solid #949494;
+	}
+	h4 {
+    	font-size: 16px;
+    	text-align: center;
+		span {
+			margin-bottom: 6px;
+			color: red;
+			    display: inline-block;
+		}
+	}
+	img {
+		height: 120px;
+	}
+}

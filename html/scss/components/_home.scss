@@ -1,0 +1,275 @@
+.about-section {
+	padding: 3em 0;
+	.inner-column {
+		.title {
+			position: relative;
+    		color: $primary-l;
+    		font-size: 24px;
+    		margin-bottom: 15px;
+    		display: inline-block;
+    		font-family: $Playball;
+			&:after {
+				position: absolute;
+    			content: '';
+    			left: 105%;
+    			bottom: 0px;
+    			width: 90px;
+    			height: 2px;
+    			background-color: $primary-l;
+			}
+		}
+		h2 {
+			position: relative;
+    		color: $dark;
+    		font-size: 32px;
+    		font-weight: 700;
+			font-family: $Poppins;
+    		margin-bottom: 20px;
+		}
+		.bold-text {
+    		position: relative;
+    		color: $dark;
+    		font-size: 22px;
+    		font-weight: 300;
+    		margin-bottom: 15px;
+		}
+		.text {
+			position: relative;
+			color: $gredish;
+			margin-bottom: 30px;
+			p{
+				
+			text-align: justify;
+			}
+		}
+		.btn-read-more {
+    		color: $primary-l;
+    		font-size: 1em;
+			border-radius: 20px;
+    		font-weight: 600;
+    		background: $white;
+    		display: inline-block;
+    		padding: 8px 38px;
+    		border: 2px solid $primary-l;
+    		text-transform: capitalize;
+			&:hover {
+				background: $primary-l;
+				color: $white;
+				outline: none;
+				box-shadow: none;
+			}
+		}
+	}
+	.image-column{
+		text-align: center;
+		height: 100%;
+		display: grid;
+		place-items: center;
+	}
+}
+
+.our-services {
+	background: url(../images/bg.jpg) fixed;
+    padding: 3em 0;
+    position: relative;
+    z-index: 1;
+	.heading-title {
+		text-align: center;
+		h2 {
+			font-size: 2.5em;
+			font-family: $Poppins;
+			margin-bottom: 0.8em;
+			color: $white;
+			position: relative;
+			&:after {
+    			content: ' ';
+    			display: block;
+    			width: 20px;
+				color: $white;
+    			height: 2px;
+   			 	margin: 0.4em auto 0.55em;
+    			background:$white;
+			}
+		}
+	}
+	.service-main {
+		background: $white;
+		padding: 15px;
+		border-radius: 8px;
+		.service-img {
+			img {
+				border-radius: 100%;
+				height: 170px;
+				margin: 0 auto;
+    			width: 170px;
+			}
+		}
+		.service-text {
+			text-align: center;
+			h3 {
+				margin: 10px 0;
+				a {
+					color: $dark;
+					font-size: 0.8em;
+				}
+			}
+			p {
+				 margin: 0;
+    			font-size: 14px;
+    			display: -webkit-box;
+    			-webkit-line-clamp: 2;
+    			-webkit-box-orient: vertical;
+    			overflow: hidden;
+				
+			}
+			.btn-vd {
+				display: inline-block;
+    			padding: 3px 10px;
+				background: $primary-d;
+    			border: 1px solid $primary-d;
+    			margin-top: 15px;
+    			color: $white;
+    			border-radius: 3px;
+			}
+		}
+	}
+	.service-block {
+		.owl-nav {
+    		margin: 20px 0;
+			text-align: center;
+			button {
+    			padding: 10px;
+    			height: 25px;
+    			width: 25px;
+    			background: $white !important;
+    			display: inline-block;
+    			color: $primary-d !important;
+				margin-right: 10px;
+				&:last-child {
+					margin: 0;
+				}
+			}
+		}
+	}
+	&:after {
+    	background: $primary-l none repeat scroll 0 0;
+    	content: "";
+    	height: 100%;
+    	left: 0;
+    	opacity: 0.8;
+    	position: absolute;
+    	top: 0;
+    	z-index: -1;
+    	width: 100%;
+	}
+}
+
+.testimonials-section {
+	background: #fafafa;
+	padding: 3em 0;
+	.title {
+			position: relative;
+    		color: $dark;
+    		font-size: 2em;
+    		margin-bottom: 15px;
+    		display: inline-block;
+    		font-family: $Playball;
+			&:after {
+				position: absolute;
+    			content: '';
+    			left: 105%;
+    			bottom: 0px;
+    			width: 90px;
+    			height: 2px;
+    			background-color: $primary-l;
+			}
+		}
+	.client-block {
+		margin-bottom: 1em;
+	}
+	.clientSayWrapper {
+		position: relative;
+		.clientSay {
+    		background: $white;
+    		padding: 34px 35px 34px 66px;
+    		position: relative;
+    		box-shadow: 0px 0px 12px rgba(0, 0, 0, .05);
+    		margin-bottom: 33px;
+			.fas {
+				position: absolute;
+    			top: 30px;
+    			left: 15px;
+    			font-size: 33px;
+    			color: $primary-l;
+			}
+			.normall {
+				color: $grey-d;
+    			font-size: 14px;
+    			line-height: 26px;
+			}
+			&:after {
+				position: absolute;
+    			bottom: -22px;
+    			left: 67px;
+    			content: '';
+    			width: 0;
+    			height: 0;
+    			border-left: 0px solid transparent;
+    			border-right: 25px solid transparent;
+    			border-top: 22px solid $white;
+			}
+		}
+		.sayPersone {
+    		position: relative;
+    		padding: 10px 0;
+			img {
+    			position: absolute;
+    			left: 0;
+				top: 7px;
+    			height: 55px;
+    			width: 55px;
+    			border-radius: 100%;
+    			max-width: 100%;
+    			display: inline-block;
+			}
+			.personeInfo {
+    			padding-left: 68px;
+			}
+			p {
+				margin-bottom: 5px;
+    			font-size: 15px;
+    			line-height: 20px;
+			}
+			span {
+				display: block;
+    			font-size: 12px;
+    			line-height: 20px;
+    			color: $primary;
+    			text-transform: uppercase;
+			}
+		}
+	}
+	.btn-feedback {
+    	margin-top: 1em;
+    	background: $primary;
+    	color: $white;
+		&:hover {
+			background: $primary-l;
+		}
+	}
+}
+
+/*
+* new slider styles
+*/
+
+.rev_slider_wrapper .text-center {text-align: center !important;}
+
+
+.rev_slider_wrapper .slide-content-box .tag-line {font-family: 'Lora';color: #fff;font-size: 22px;line-height: 28px;font-style: italic;}
+.rev_slider_wrapper .slide-content-box .tag-line.has-line:after {content: '';width: 62px;height: 1px;background: #fff;}
+.rev_slider_wrapper .slide-content-box .tag-line.has-line.is-inline:after {display: inline-block;margin-left: 20px;}
+.rev_slider_wrapper .slide-content-box .big-title {font-family: 'Poppins';color: #fff;font-size: 50px;line-height: 55px;font-weight: 600;}
+.rev_slider_wrapper .slide-content-box .text {font-family: 'Poppins';color: #fff;font-size: 18px;line-height: 26px;}
+// .rev_slider_wrapper .slide-content-box .btn-box {}
+.rev_slider_wrapper .slide-content-box .btn-box .slide-btn {font-family: 'Poppins';background: #fff;color: #242424;padding: 17.5px 41.5px;letter-spacing: .03em;font-size: 18px;border-radius: 30px;}

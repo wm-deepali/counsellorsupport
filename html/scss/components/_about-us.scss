@@ -1,0 +1,61 @@
+.about-us-section {
+	padding: 3em 0;
+	.inner-column {
+		font-family: $Poppins;
+		.title {
+			position: relative;
+    		color: $primary-l;
+    		font-size: 24px;
+    		margin-bottom: 15px;
+    		display: inline-block;
+    		font-family: $Playball;
+			&:after {
+				position: absolute;
+    			content: '';
+    			left: 105%;
+    			bottom: 0px;
+    			width: 90px;
+    			height: 2px;
+    			background-color: $primary-l;
+			}
+		}
+		h2 {
+			position: relative;
+    		color: $dark;
+    		font-size: 32px;
+    		font-weight: 700;
+			font-family: $Poppins;
+    		margin-bottom: 20px;
+		}
+		.bold-text {
+    		position: relative;
+    		color: $dark;
+    		font-size: 22px;
+    		font-weight: 300;
+    		margin-bottom: 15px;
+		}
+		.text {
+			position: relative;
+            color: $gredish;
+            text-align: justify;
+    		margin-bottom: 30px;
+		}
+    }
+    .image-column{
+        &.image-1{
+            text-align: right;
+            img{
+                width: 250px;
+                border-radius: 10px;
+            }
+        }
+        &.image-2{
+            text-align: left;
+            margin-top: -73px;
+            img{
+                width: 250px;
+                border-radius: 10px;
+            }
+        }
+    }
+}

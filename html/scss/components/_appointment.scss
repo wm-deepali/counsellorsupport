@@ -1,0 +1,78 @@
+.appointment-page-section{
+    padding: 5em 0em;
+    background: linear-gradient(#578d8db8, #578d8db8), url(../images/image-1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    .main{
+        height: 100%;
+        display: grid;
+        place-content: center;
+        padding: 30px;
+        border-radius: 20px 0px 0px 20px;
+        text-align: center;
+        img{
+            margin: auto;
+        }
+        .address{
+            height: 100%;
+            margin-top: 70px;
+            p{
+                padding: 5px 0px;
+                color: $white;
+                font-weight: 500;
+                font-size: 20px;
+            }
+            h2{
+                color: $white;
+                font-family: $Nunito;
+              a{
+                  color: $white;
+              }
+            }
+        }
+    }
+    .form{
+        padding: 30px;
+        border-right: 2px solid $primary;
+        background: $white;
+        .title{
+            width: 100%;
+            text-align: center;
+            margin-bottom: 20px;
+            h4{
+                color: $primary;
+                font-weight: bold;
+                font-family: $Poppins;
+            }
+        }
+        .form-group{
+            label{
+                color: $primary;
+                font-family: $Poppins;
+                font-size: 13px;
+            }
+            .form-control{
+                border-radius: 0px;
+                &::placeholder{
+                    opacity: .7;
+                    font-size: 13px;
+                    font-family: $Poppins;
+                }
+            }
+        }
+        .button{
+            width: 100%;
+            text-align: center;
+            .submit-btn{
+                border: 1px solid $primary;
+                border-radius: 20px;
+                padding: 5px 20px;
+                font-size: 13px;
+                font-weight: bold;
+                background: $primary;
+                color: $white;
+                text-transform: uppercase;
+            }
+        }
+    }
+}

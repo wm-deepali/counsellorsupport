@@ -1,0 +1,92 @@
+.feedback-page-section{
+    padding: 5em 0em;
+    background: linear-gradient(#578d8db8, #578d8db8), url(../images/image-1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    .title{
+        margin-bottom: 30px;
+        h2{
+            text-align: center;
+            color: $white;
+            font-family: $Playball;
+        }
+    }
+    .clientSayWrapper{
+        margin-bottom: 30px;
+        display: flex;
+        .clientSay{
+            padding-left: 20px;
+            .sayPersone{
+                font-family: $Playball;
+                .personeInfo{
+                    font-family: $Playball;
+                    p{
+                        margin: 0px;
+                    }
+                }
+            }
+        }
+    }
+    .page{
+        .pagination{
+            margin-bottom: 0px;
+            .page-item{
+                .page-link{
+                    color: $dark;
+                }
+                &.active{
+                    .page-link{
+                        background: $primary;
+                        border-color: $primary;
+                        color: $white;
+                    }
+                }
+            }
+        }
+    }
+    .form{
+        padding: 30px;
+        border-right: 2px solid $primary;
+        background: $white;
+        .title{
+            width: 100%;
+            text-align: center;
+            margin-bottom: 20px;
+            h4{
+                color: $primary;
+                font-weight: bold;
+                font-family: $Playball;
+            }
+        }
+        .form-group{
+            label{
+                color: $primary;
+                font-family: $Playball;
+                font-size: 13px;
+            }
+            .form-control{
+                border-radius: 0px;
+                font-family: $Poppins;
+                &::placeholder{
+                    opacity: .7;
+                    font-size: 13px;
+                    font-family: $Playball;
+                }
+            }
+        }
+        .button{
+            width: 100%;
+            text-align: center;
+            .submit-btn{
+                border: 1px solid $primary;
+                border-radius: 20px;
+                padding: 5px 20px;
+                font-size: 13px;
+                font-weight: bold;
+                background: $primary;
+                color: $white;
+                text-transform: uppercase;
+            }
+        }
+    }
+}
