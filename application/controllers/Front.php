@@ -4,10 +4,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 
-class Front extends CI_Controller {
+class Front extends CI_Controller
+{
 
 	public function __construct()
-
 	{
 
 		parent::__construct();
@@ -19,78 +19,74 @@ class Front extends CI_Controller {
 	}
 
 	public function index()
-
 	{
 
-		$data['popup']=$this->Front_model->get_popup();
-		
-		$data['feedbacks']=$this->Front_model->get_feedback();
-       
-		$data['about']=$this->Front_model->get_aboutus();
+		$data['popup'] = $this->Front_model->get_popup();
 
-		$data['header']=$this->Front_model->get_header();
-         $data['services']=$this->Front_model->get_services();
-		$data['footer']=$this->Front_model->get_footer();
+		$data['feedbacks'] = $this->Front_model->get_feedback();
 
-		$data['social']=$this->Front_model->get_social();
-		$data['home']=$this->Front_model->get_home();
-		$data['sliders']=$this->Front_model->get_slider();
+		$data['about'] = $this->Front_model->get_aboutus();
+
+		$data['header'] = $this->Front_model->get_header();
+		$data['services'] = $this->Front_model->get_services();
+		$data['footer'] = $this->Front_model->get_footer();
+
+		$data['social'] = $this->Front_model->get_social();
+		$data['home'] = $this->Front_model->get_home();
+		$data['sliders'] = $this->Front_model->get_slider();
 
 		$this->load->view('front/index', $data);
 
 	}
 
 	public function about_us()
-
 	{
 
-		$data['services']=$this->Front_model->get_services();
+		$data['services'] = $this->Front_model->get_services();
 
-		$data['about']=$this->Front_model->get_aboutus();
+		$data['about'] = $this->Front_model->get_aboutus();
 
-		$data['header']=$this->Front_model->get_header();
+		$data['header'] = $this->Front_model->get_header();
 
-		$data['footer']=$this->Front_model->get_footer();
+		$data['footer'] = $this->Front_model->get_footer();
 
-		$data['social']=$this->Front_model->get_social();
-		
+		$data['social'] = $this->Front_model->get_social();
+
 
 		$this->load->view('front/about-us', $data);
 
 	}
 
 	public function services()
-
 	{
 
-		$data['services']=$this->Front_model->get_services();
-		$data['header']=$this->Front_model->get_header();
+		$data['services'] = $this->Front_model->get_services();
+		$data['header'] = $this->Front_model->get_header();
 
-		$data['footer']=$this->Front_model->get_footer();
+		$data['footer'] = $this->Front_model->get_footer();
 
-		$data['social']=$this->Front_model->get_social();
+		$data['social'] = $this->Front_model->get_social();
 
-		$this->load->view('front/services',$data);
+		$this->load->view('front/services', $data);
 
-		
+
 
 	}
 
 	public function service_detail($slug)
-
 	{
-    $data['timeslot']=$this->Front_model->get_timeslot();
-		$data['services']=$this->Front_model->get_services();
+		$data['timeslot'] = $this->Front_model->get_timeslot();
+		$data['services'] = $this->Front_model->get_services();
 
-		$data['service_detail']=$this->Front_model->get_service($slug);
+		$data['service_detail'] = $this->Front_model->get_service($slug);
 
-		$data['latest_service']=$this->Front_model->latest_services();
+		$data['latest_service'] = $this->Front_model->latest_services();
 
-		$data['header']=$this->Front_model->get_header();
+		$data['header'] = $this->Front_model->get_header();
 
-		$data['footer']=$this->Front_model->get_footer();
-        $data['fees']=$this->Front_model->get_fees();
-		$data['social']=$this->Front_model->get_social();
+		$data['footer'] = $this->Front_model->get_footer();
+		$data['fees'] = $this->Front_model->get_fees();
+		$data['social'] = $this->Front_model->get_social();
 
 		// print_r($data['service_detail']);
 
@@ -101,72 +97,67 @@ class Front extends CI_Controller {
 	}
 
 	public function contact()
-
 	{
 
-		$data['services']=$this->Front_model->get_services();
+		$data['services'] = $this->Front_model->get_services();
 
-		$data['timeslot']=$this->Front_model->get_timeslot();
+		$data['timeslot'] = $this->Front_model->get_timeslot();
 
-		$data['header']=$this->Front_model->get_header();
+		$data['header'] = $this->Front_model->get_header();
 
-		$data['footer']=$this->Front_model->get_footer();
+		$data['footer'] = $this->Front_model->get_footer();
 
-		$data['social']=$this->Front_model->get_social();
+		$data['social'] = $this->Front_model->get_social();
 
 		$this->load->view('front/contact', $data);
 
 	}
 
 	public function insert_contact()
+	{
 
-	{	
+		$this->form_validation->set_rules("name", "Name", "required");
 
-		$this->form_validation->set_rules("name","Name","required");
-
-		$this->form_validation->set_rules("mobile","Contact Number","required");
+		$this->form_validation->set_rules("mobile", "Contact Number", "required");
 
 		$this->form_validation->set_rules(
 
-			"email","Email",
+			"email",
+			"Email",
 
 			"trim|required|valid_email"
 
 		);
 
-		if($this->form_validation->run())
+		if ($this->form_validation->run()) {
 
-		{
+			$data = array(
 
-			$data=array(
+				"name" => $this->input->post("name"),
 
-				"name"=>$this->input->post("name"),
+				"email" => $this->input->post("email"),
 
-				"email"=>$this->input->post("email"),
+				"mobile" => $this->input->post("mobile"),
 
-				"mobile"=>$this->input->post("mobile"),
+				"service_id" => $this->input->post("service"),
 
-				"service_id"=>$this->input->post("service"),
+				"time" => $this->input->post("timeslot"),
 
-				"time"=>$this->input->post("timeslot"),
-
-				"description"=>$this->input->post("description")
+				"description" => $this->input->post("description")
 
 			);
 
 
 
-			if(!empty($_FILES["document"]["name"]))
+			if (!empty($_FILES["document"]["name"])) {
 
-			{
+				$path = './uploads/document/';
 
-				$path='./uploads/document/';
+				$thumb_path = './uploads/document/thumb/';
 
-				$thumb_path='./uploads/document/thumb/';
+				$height = 500;
 
-				$height=500;
-
-				$width=500;
+				$width = 500;
 
 				if (!is_dir('uploads/document')) {
 
@@ -176,17 +167,17 @@ class Front extends CI_Controller {
 
 				}
 
-				$new_name=str_replace(" ","",'contact'.time().$_FILES['document']['name']);
+				$new_name = str_replace(" ", "", 'contact' . time() . $_FILES['document']['name']);
 
-				$_FILES['file']['name']     = $new_name;
+				$_FILES['file']['name'] = $new_name;
 
-				$_FILES['file']['type']     = $_FILES['document']['type'];
+				$_FILES['file']['type'] = $_FILES['document']['type'];
 
 				$_FILES['file']['tmp_name'] = $_FILES['document']['tmp_name'];
 
-				$_FILES['file']['error']    = $_FILES['document']['error'];
+				$_FILES['file']['error'] = $_FILES['document']['error'];
 
-				$_FILES['file']['size']     = $_FILES['document']['size'];
+				$_FILES['file']['size'] = $_FILES['document']['size'];
 
 				$config['upload_path'] = $path;
 
@@ -198,47 +189,47 @@ class Front extends CI_Controller {
 
 				if ($this->upload->do_upload('file')) {
 
-					$data['document'] = $path.$new_name;
+					$data['document'] = $path . $new_name;
 
-					$this->resizeImage($new_name,$path,$thumb_path,$height,$width);
+					$this->resizeImage($new_name, $path, $thumb_path, $height, $width);
 
-					$data['document_thumb'] = $thumb_path.$new_name;
+					$data['document_thumb'] = $thumb_path . $new_name;
 
 				} else {
 
-					$this->session->set_flashdata('err_msg',$this->upload->display_errors());
+					$this->session->set_flashdata('err_msg', $this->upload->display_errors());
 
-					redirect('contact','refresh');
+					redirect('contact', 'refresh');
 
 				}
 
 			}
 
-			$return=$this->Front_model->insert_contact($data);
+			$return = $this->Front_model->insert_contact($data);
 
 			if ($return) {
 
-				$this->session->set_flashdata("success","Add Successfull");
+				$this->session->set_flashdata("success", "Add Successfull");
 
-				redirect('contact-us','refresh');
+				redirect('contact-us', 'refresh');
 
 			} else {
 
-				$this->session->set_flashdata("error","Add Failed");
+				$this->session->set_flashdata("error", "Add Failed");
 
-				redirect('contact-us','refresh');
+				redirect('contact-us', 'refresh');
 
 			}
 
 
 
-		}else{
+		} else {
 
 
 
-			$this->session->set_flashdata('errors',validation_errors());
+			$this->session->set_flashdata('errors', validation_errors());
 
-			redirect('contact-us','refresh');
+			redirect('contact-us', 'refresh');
 
 		}
 
@@ -246,8 +237,7 @@ class Front extends CI_Controller {
 
 
 
-	public function resizeImage($new_name,$path,$thumb_path,$height,$width)
-
+	public function resizeImage($new_name, $path, $thumb_path, $height, $width)
 	{
 
 		$this->load->library('image_lib');
@@ -256,7 +246,7 @@ class Front extends CI_Controller {
 
 			'image_library' => 'gd2',
 
-			'source_image' => $path.$new_name,
+			'source_image' => $path . $new_name,
 
 			'new_image' => $thumb_path,
 
@@ -274,9 +264,7 @@ class Front extends CI_Controller {
 
 		$this->image_lib->initialize($config_manip);
 
-		if (!$this->image_lib->resize())
-
-		{
+		if (!$this->image_lib->resize()) {
 
 			echo $this->image_lib->display_errors();
 
@@ -287,106 +275,111 @@ class Front extends CI_Controller {
 	}
 
 	public function consult_online()
-
 	{
 
-		$data['services']=$this->Front_model->get_services();
-		$data['consult_services']=$this->Front_model->consult_service();
-        $data['dates']=$this->Front_model->get_date();
-        // print_r($data['dates']);exit;
-		$data['faqs']=$this->Front_model->get_faqs();
-		$data['timeslot']=$this->Front_model->get_timeslot();
-		$data['header']=$this->Front_model->get_header();
-		$data['footer']=$this->Front_model->get_footer();
-		$data['social']=$this->Front_model->get_social();
-		$data['fees']=$this->Front_model->get_fees();
-		$this->load->view('front/consult-online',$data);
+		$data['services'] = $this->Front_model->get_services();
+		$data['consult_services'] = $this->Front_model->consult_service();
+		$data['dates'] = $this->Front_model->get_date();
+		// print_r($data['dates']);exit;
+		$data['faqs'] = $this->Front_model->get_faqs();
+		$data['timeslot'] = $this->Front_model->get_timeslot();
+		$data['header'] = $this->Front_model->get_header();
+		$data['footer'] = $this->Front_model->get_footer();
+		$data['social'] = $this->Front_model->get_social();
+		$data['fees'] = $this->Front_model->get_fees();
+		$data['categories'] = $this->Front_model->get_active_consult_categories();
+		$this->load->view('front/consult-online', $data);
 
 	}
-	
+
 	public function consult_details()
-
 	{
+		// existing data (KEEP AS-IS)
+		$data['services'] = $this->Front_model->get_services();
+		$data['consult_services'] = $this->Front_model->consult_service();
+		$data['dates'] = $this->Front_model->get_date();
+		$data['faqs'] = $this->Front_model->get_faqs();
+		$data['timeslot'] = $this->Front_model->get_timeslot();
+		$data['header'] = $this->Front_model->get_header();
+		$data['footer'] = $this->Front_model->get_footer();
+		$data['social'] = $this->Front_model->get_social();
+		$data['fees'] = $this->Front_model->get_fees();
 
-		$data['services']=$this->Front_model->get_services();
-		$data['consult_services']=$this->Front_model->consult_service();
-        $data['dates']=$this->Front_model->get_date();
-        // print_r($data['dates']);exit;
-		$data['faqs']=$this->Front_model->get_faqs();
-		$data['timeslot']=$this->Front_model->get_timeslot();
-		$data['header']=$this->Front_model->get_header();
-		$data['footer']=$this->Front_model->get_footer();
-		$data['social']=$this->Front_model->get_social();
-		$data['fees']=$this->Front_model->get_fees();
-		$this->load->view('front/consult-details',$data);
 
+		// 🔥 NEW: get packages (optionally by category)
+		$category_slug = $this->input->get('category');
+
+		if ($category_slug) {
+			$category = $this->Front_model->get_category_by_slug($category_slug);
+			$data['packages'] = $this->Front_model->get_packages_by_category($category->id);
+		} else {
+			$data['packages'] = $this->Front_model->get_all_packages();
+		}
+
+		$this->load->view('front/consult-details', $data);
 	}
+
 	public function fetch_timeslot()
 	{
-		
+
 		$date = $this->input->post('date');
-		if($date)
-		{
+		if ($date) {
 			echo $this->Front_model->fetch_timeslot($date);
 		}
 	}
 
 	public function feedback()
-
 	{
 
-		$data['services']=$this->Front_model->get_services();
+		$data['services'] = $this->Front_model->get_services();
 
-	   $data['feedbacks']=$this->Front_model->get_feedback();
+		$data['feedbacks'] = $this->Front_model->get_feedback();
 
-	   $data['header']=$this->Front_model->get_header();
+		$data['header'] = $this->Front_model->get_header();
 
-		$data['footer']=$this->Front_model->get_footer();
+		$data['footer'] = $this->Front_model->get_footer();
 
-		$data['social']=$this->Front_model->get_social();
+		$data['social'] = $this->Front_model->get_social();
 
-		$this->load->view('front/feedback',$data
+		$this->load->view(
+			'front/feedback',
+			$data
 
-	);
+		);
 
 	}
 
 	public function insert_feedback()
+	{
 
-	{	
+		$this->form_validation->set_rules("name", " Name", "required");
 
-		$this->form_validation->set_rules("name"," Name","required");
+		$this->form_validation->set_rules("email", "Email", "trim|required|valid_email");
 
-		$this->form_validation->set_rules("email","Email","trim|required|valid_email");
+		if ($this->form_validation->run()) {
 
-		if($this->form_validation->run())
+			$data = array(
 
-		{
+				"type" => $this->input->post("type"),
 
-			$data=array(
+				"name" => $this->input->post("name"),
 
-				"type"=>$this->input->post("type"),
+				"email" => $this->input->post("email"),
 
-				"name"=>$this->input->post("name"),
-
-				"email"=>$this->input->post("email"),
-
-				"message"=>$this->input->post("message"),
-				"status"=>"Pending"
+				"message" => $this->input->post("message"),
+				"status" => "Pending"
 
 			);
 
-			if(!empty($_FILES["image"]["name"]))
+			if (!empty($_FILES["image"]["name"])) {
 
-			{
+				$path = './uploads/feedback/';
 
-				$path='./uploads/feedback/';
+				$thumb_path = './uploads/feedback/thumb/';
 
-				$thumb_path='./uploads/feedback/thumb/';
+				$height = 500;
 
-				$height=500;
-
-				$width=500;
+				$width = 500;
 
 				if (!is_dir('uploads/feedback')) {
 
@@ -396,17 +389,17 @@ class Front extends CI_Controller {
 
 				}
 
-				$new_name=str_replace(" ","",'feedback'.time().$_FILES['image']['name']);
+				$new_name = str_replace(" ", "", 'feedback' . time() . $_FILES['image']['name']);
 
-				$_FILES['file']['name']     = $new_name;
+				$_FILES['file']['name'] = $new_name;
 
-				$_FILES['file']['type']     = $_FILES['image']['type'];
+				$_FILES['file']['type'] = $_FILES['image']['type'];
 
 				$_FILES['file']['tmp_name'] = $_FILES['image']['tmp_name'];
 
-				$_FILES['file']['error']    = $_FILES['image']['error'];
+				$_FILES['file']['error'] = $_FILES['image']['error'];
 
-				$_FILES['file']['size']     = $_FILES['image']['size'];
+				$_FILES['file']['size'] = $_FILES['image']['size'];
 
 				$config['upload_path'] = $path;
 
@@ -418,80 +411,78 @@ class Front extends CI_Controller {
 
 				if ($this->upload->do_upload('file')) {
 
-					$data['image'] = $path.$new_name;
+					$data['image'] = $path . $new_name;
 
-					$this->resizeImage($new_name,$path,$thumb_path,$height,$width);
+					$this->resizeImage($new_name, $path, $thumb_path, $height, $width);
 
-					$data['image_thumb'] = $thumb_path.$new_name;
+					$data['image_thumb'] = $thumb_path . $new_name;
 
 				} else {
 
-					$this->session->set_flashdata('error',$this->upload->display_errors());
+					$this->session->set_flashdata('error', $this->upload->display_errors());
 
-					redirect('feedback','refresh');
+					redirect('feedback', 'refresh');
 
 				}
 
 			}
 
-			$return=$this->Front_model->insert_feedback($data);
+			$return = $this->Front_model->insert_feedback($data);
 
 			if ($return) {
 
-				$this->session->set_flashdata("success","Add Successfull");
+				$this->session->set_flashdata("success", "Add Successfull");
 
-				redirect('feedback','refresh');
+				redirect('feedback', 'refresh');
 
 			} else {
 
-				$this->session->set_flashdata("error","Add Failed");
+				$this->session->set_flashdata("error", "Add Failed");
 
-				redirect('feedback','refresh');
+				redirect('feedback', 'refresh');
 
 			}
 
 
 
-		}else{
+		} else {
 
-			$this->session->set_flashdata('errors',validation_errors());
+			$this->session->set_flashdata('errors', validation_errors());
 
-			redirect('feedback','refresh');
+			redirect('feedback', 'refresh');
 
 		}
 
 	}
 	public function add_feedback()
-	{	
-		
-		$data=array(
-			"name"=>$this->input->post("name"),
-			"email"=>$this->input->post("email"),
-			"type"=>$this->input->post("type"),
-			"message"=>$this->input->post("message"),	
+	{
+
+		$data = array(
+			"name" => $this->input->post("name"),
+			"email" => $this->input->post("email"),
+			"type" => $this->input->post("type"),
+			"message" => $this->input->post("message"),
 		);
-		$result=$this->Front_model->insert_feedback($data);
-		if($result){
-		echo  1;	
-		}
-		else{
-		echo  0;	
+		$result = $this->Front_model->insert_feedback($data);
+		if ($result) {
+			echo 1;
+		} else {
+			echo 0;
 		}
 	}
 
 	public function appointment()
-
 	{
 
-		$data['services']=$this->Front_model->get_services();
-        $data['dates']=$this->Front_model->get_date();
-		$data['timeslot']=$this->Front_model->get_timeslot();
+		$data['services'] = $this->Front_model->get_services();
+		$data['dates'] = $this->Front_model->get_date();
+		$data['timeslot'] = $this->Front_model->get_timeslot();
 
-		$data['header']=$this->Front_model->get_header();
+		$data['header'] = $this->Front_model->get_header();
 
-		$data['footer']=$this->Front_model->get_footer();
+		$data['footer'] = $this->Front_model->get_footer();
 
-		$data['social']=$this->Front_model->get_social();
+		$data['social'] = $this->Front_model->get_social();
 
 		$this->load->view('front/appointment', $data);
 
@@ -499,351 +490,389 @@ class Front extends CI_Controller {
 
 
 	public function add_appointment()
-
-	{	
-
-		$this->form_validation->set_rules("name","Name","required");
-
-		$this->form_validation->set_rules("mobile","Contact Number","required");
-
-		$this->form_validation->set_rules("email","Email","trim|required|valid_email");
-
-		if($this->form_validation->run())
-
-		{
-
-	
-
-			$data=array(
-
-				"name"=>$this->input->post("name"),
-
-				"email"=>$this->input->post("email"),
-
-				"mobile"=>$this->input->post("mobile"),
-
-				"service_id"=>$this->input->post("service"),
-
-				"timeslot_id"=>$this->input->post("timeslot"),
-
-				"description"=>$this->input->post("description"),
-			    "amount"=>$this->input->post("amount"),
-				"payment_proceed"=>"No",
-				"payment_status"=>"Pending",
-				"appoint_type"=>"online"
-
-			);
-
-			if(!empty($_FILES["document"]["name"]))
-
-			{
-
-				$path='./uploads/document/';
-
-				$thumb_path='./uploads/document/thumb/';
-
-				$height=500;
-
-				$width=500;
-
-				if (!is_dir('uploads/document')) {
-
-					mkdir('./uploads/document', 0777, TRUE);
-
-					mkdir('./uploads/document/thumb', 0777, TRUE);
-
-				}
-
-				$new_name=str_replace(" ","",'contact'.time().$_FILES['document']['name']);
-
-				$_FILES['file']['name']     = $new_name;
-
-				$_FILES['file']['type']     = $_FILES['document']['type'];
-
-				$_FILES['file']['tmp_name'] = $_FILES['document']['tmp_name'];
-
-				$_FILES['file']['error']    = $_FILES['document']['error'];
-
-				$_FILES['file']['size']     = $_FILES['document']['size'];
-
-				$config['upload_path'] = $path;
-
-				$config['allowed_types'] = 'jpg|jpeg|png|pdf|doc|docx';
-
-				$this->load->library('upload', $config);
-
-				$this->upload->initialize($config);
-
-				if ($this->upload->do_upload('file')) {
-
-					$data['image'] = $path.$new_name;
-
-					$this->resizeImage($new_name,$path,$thumb_path,$height,$width);
-
-					$data['image_thumb'] = $thumb_path.$new_name;
-
-				} else {
-
-					$this->session->set_flashdata('errors',$this->upload->display_errors());
-
-					redirect('consult-online','refresh');
-
-				}
-
-			}
-
-			$return=$this->Front_model->insert_appointment($data);
-
-			if ($return) {
-              $id = $this->db->insert_id();
-				$this->session->set_userdata("appoint_id",$id);
-				redirect('front/proceed_to_payment','refresh');
-
-			} else {
-
-				$this->session->set_flashdata("errors","Add Failed");
-				    redirect('consult-online','refresh');
-			}
-
-		}else{
-
-			$this->session->set_flashdata('errors',validation_errors());
-
-				    redirect('consult-online','refresh');
+	{
+		$this->form_validation->set_rules("name", "Name", "required");
+		
+		$this->form_validation->set_rules("mobile", "Contact Number", "required");
+		
+		$this->form_validation->set_rules("email", "Email", "trim|required|valid_email");
+		
+		$this->form_validation->set_rules("package_id", "Package", "required|integer");
+		
+		
+		if ($this->form_validation->run()) {
 			
-		}
-
-	}
-	
-		public function insert_appointment()
-    {
-	
-		$this->form_validation->set_rules("name","Name","required");
-
-		$this->form_validation->set_rules("mobile","Contact Number","required");
-
-		$this->form_validation->set_rules("email","Email","trim|required|valid_email");
-
-		if($this->form_validation->run())
-
-		{
-
-	
-
-			$data=array(
-
-				"amount"=>$this->input->post("amount"),
-
-				"name"=>$this->input->post("name"),
-
-				"email"=>$this->input->post("email"),
-
-				"mobile"=>$this->input->post("mobile"),
-
-				"service_id"=>$this->input->post("service"),
-
-				"timeslot_id"=>$this->input->post("timeslot"),
-
-				"description"=>$this->input->post("description"),
-				"appoint_type"=>"visit us"
-
-			);
-
-			if(!empty($_FILES["document"]["name"]))
-
-			{
-
-				$path='./uploads/document/';
-
-				$thumb_path='./uploads/document/thumb/';
-
-				$height=500;
-
-				$width=500;
-
-				if (!is_dir('uploads/document')) {
-
-					mkdir('./uploads/document', 0777, TRUE);
-
-					mkdir('./uploads/document/thumb', 0777, TRUE);
-
-				}
-
-				$new_name=str_replace(" ","",'contact'.time().$_FILES['document']['name']);
-
-				$_FILES['file']['name']     = $new_name;
-
-				$_FILES['file']['type']     = $_FILES['document']['type'];
-
-				$_FILES['file']['tmp_name'] = $_FILES['document']['tmp_name'];
-
-				$_FILES['file']['error']    = $_FILES['document']['error'];
-
-				$_FILES['file']['size']     = $_FILES['document']['size'];
-
-				$config['upload_path'] = $path;
-
-				$config['allowed_types'] = 'jpg|jpeg|png|pdf|doc|docx';
-
-				$this->load->library('upload', $config);
-
-				$this->upload->initialize($config);
-
-				if ($this->upload->do_upload('file')) {
-
-					$data['image'] = $path.$new_name;
-
-					$this->resizeImage($new_name,$path,$thumb_path,$height,$width);
-
-					$data['image_thumb'] = $thumb_path.$new_name;
-
-				} else {
-
-					$this->session->set_flashdata('errors',$this->upload->display_errors());
-
-					redirect('appointment','refresh');
-
-				}
-
-			}
-
-			$return=$this->Front_model->insert_appointment($data);
-
-			if ($return) {
-              
-				$this->session->set_flashdata("success","Add Successfull");
 			
-				   redirect('appointment','refresh');
+			
+			$package_id = $this->input->post('package_id');
+			$package = $this->Front_model->get_package_by_id($package_id);
+			
+			if (!$package) {
+				$this->session->set_flashdata('errors', 'Invalid package selected');
+				redirect('consult-online', 'refresh');
+			}
+			
+			$data = array(
+				"name" => $this->input->post("name"),
+				"email" => $this->input->post("email"),
+				"mobile" => $this->input->post("mobile"),
+				// "service_id" => $this->input->post("service"),
+				"timeslot_id" => $this->input->post("timeslot"),
+				"description" => $this->input->post("description"),
+				"package_id" => $package_id,
+				"amount" => $package->price,   // 🔒 SAFE
+				"payment_proceed" => "No",
+				"payment_status" => "Pending",
+				"appoint_type" => "online"
+			);
+			
+			if (!empty($_FILES["document"]["name"])) {
 				
-			
-			} else {
-				$this->session->set_flashdata("errors","Add Failed");
-				   redirect('appointment','refresh');
-			}
-		}else{
+				$path = './uploads/document/';
+				
+				$thumb_path = './uploads/document/thumb/';
+				
+				$height = 500;
+				
+				$width = 500;
+				
+				if (!is_dir('uploads/document')) {
+					
+					mkdir('./uploads/document', 0777, TRUE);
+					
+					mkdir('./uploads/document/thumb', 0777, TRUE);
+					
+				}
+				
+				$new_name = str_replace(" ", "", 'contact' . time() . $_FILES['document']['name']);
+				
+				$_FILES['file']['name'] = $new_name;
 
-			$this->session->set_flashdata('errors',validation_errors());
-            redirect('appointment','refresh');
+				$_FILES['file']['type'] = $_FILES['document']['type'];
+
+				$_FILES['file']['tmp_name'] = $_FILES['document']['tmp_name'];
+				
+				$_FILES['file']['error'] = $_FILES['document']['error'];
+				
+				$_FILES['file']['size'] = $_FILES['document']['size'];
+				
+				$config['upload_path'] = $path;
+				
+				$config['allowed_types'] = 'jpg|jpeg|png|pdf|doc|docx';
+				
+				$this->load->library('upload', $config);
+				
+				$this->upload->initialize($config);
+				
+				if ($this->upload->do_upload('file')) {
+					
+					$data['image'] = $path . $new_name;
+					
+					$this->resizeImage($new_name, $path, $thumb_path, $height, $width);
+					
+					$data['image_thumb'] = $thumb_path . $new_name;
+					
+				} else {
+					
+					$this->session->set_flashdata('errors', $this->upload->display_errors());
+					
+					redirect('consult-online', 'refresh');
+					
+				}
+				
+			}
+
+			// echo'<pre>';print_r($data);echo'</pre>';exit;
+			$return = $this->Front_model->insert_appointment($data);
+			
+			if ($return) {
+				$id = $this->db->insert_id();
+				$this->session->set_userdata("appoint_id", $id);
+				redirect('front/proceed_to_payment', 'refresh');
+
+			} else {
+
+				$this->session->set_flashdata("errors", "Add Failed");
+				redirect('consult-online', 'refresh');
+			}
+
+		} else {
+
+			$this->session->set_flashdata('errors', validation_errors());
+
+			redirect('consult-online', 'refresh');
+
 		}
 
 	}
+
+	public function insert_appointment()
+	{
+
+		$this->form_validation->set_rules("name", "Name", "required");
+
+		$this->form_validation->set_rules("mobile", "Contact Number", "required");
+
+		$this->form_validation->set_rules("email", "Email", "trim|required|valid_email");
+
+		if ($this->form_validation->run()) {
+
+
+
+			$data = array(
+
+				"amount" => $this->input->post("amount"),
+
+				"name" => $this->input->post("name"),
+
+				"email" => $this->input->post("email"),
+
+				"mobile" => $this->input->post("mobile"),
+
+				// "service_id" => $this->input->post("service"),
+
+				"timeslot_id" => $this->input->post("timeslot"),
+
+				"description" => $this->input->post("description"),
+				"appoint_type" => "visit us"
+
+			);
+
+			if (!empty($_FILES["document"]["name"])) {
+
+				$path = './uploads/document/';
+
+				$thumb_path = './uploads/document/thumb/';
+
+				$height = 500;
+
+				$width = 500;
+
+				if (!is_dir('uploads/document')) {
+
+					mkdir('./uploads/document', 0777, TRUE);
+
+					mkdir('./uploads/document/thumb', 0777, TRUE);
+
+				}
+
+				$new_name = str_replace(" ", "", 'contact' . time() . $_FILES['document']['name']);
+
+				$_FILES['file']['name'] = $new_name;
+
+				$_FILES['file']['type'] = $_FILES['document']['type'];
+
+				$_FILES['file']['tmp_name'] = $_FILES['document']['tmp_name'];
+
+				$_FILES['file']['error'] = $_FILES['document']['error'];
+
+				$_FILES['file']['size'] = $_FILES['document']['size'];
+
+				$config['upload_path'] = $path;
+
+				$config['allowed_types'] = 'jpg|jpeg|png|pdf|doc|docx';
+
+				$this->load->library('upload', $config);
+
+				$this->upload->initialize($config);
+
+				if ($this->upload->do_upload('file')) {
+
+					$data['image'] = $path . $new_name;
+
+					$this->resizeImage($new_name, $path, $thumb_path, $height, $width);
+
+					$data['image_thumb'] = $thumb_path . $new_name;
+
+				} else {
+
+					$this->session->set_flashdata('errors', $this->upload->display_errors());
+
+					redirect('appointment', 'refresh');
+
+				}
+
+			}
+
+			$return = $this->Front_model->insert_appointment($data);
+
+			if ($return) {
+
+				$this->session->set_flashdata("success", "Add Successfull");
+
+				redirect('appointment', 'refresh');
+
+
+			} else {
+				$this->session->set_flashdata("errors", "Add Failed");
+				redirect('appointment', 'refresh');
+			}
+		} else {
+
+			$this->session->set_flashdata('errors', validation_errors());
+			redirect('appointment', 'refresh');
+		}
+
+	}
+
+
+	public function mark_whatsapp_payment()
+{
+	$appoint_id = $this->input->post("appoint_id");
 	
+    if (!$appoint_id) {
+		echo 0;
+        return;
+    }
+	
+    // 1️⃣ Get appointment amount securely
+    $appointment = $this->db
+	->select('amount')
+	->where('id', $appoint_id)
+	->get('appointment')
+	->row();
+	
+    if (!$appointment) {
+		echo 0;
+        return;
+    }
+	
+    $amount = $appointment->amount;
+	
+    // 2️⃣ Insert payment entry (WhatsApp)
+    $data = array(
+        "appointment_id"   => $appoint_id,
+        "transaction_id"   => NULL,
+        "hash"             => NULL,
+        "service_provider" => "WhatsApp",
+        "amount"           => $amount,
+        "status"           => "Pending",
+        "added_on"         => date('Y-m-d H:i:s')
+    );
+	
+    $result = $this->Front_model->insert_payment($data);
+    if ($result) {		
+        echo 1;
+    } else {
+        echo 0;
+    }
+}
 
 	public function disclaimer()
 	{
 
-		$data['header']=$this->Front_model->get_header();
+		$data['header'] = $this->Front_model->get_header();
 
-		$data['footer']=$this->Front_model->get_footer();
-        $data['services']=$this->Front_model->get_services();
-		$data['social']=$this->Front_model->get_social();
-		$data['disclaimer']=$this->Front_model->get_disclaimer();
+		$data['footer'] = $this->Front_model->get_footer();
+		$data['services'] = $this->Front_model->get_services();
+		$data['social'] = $this->Front_model->get_social();
+		$data['disclaimer'] = $this->Front_model->get_disclaimer();
 
 		$this->load->view('front/disclaimer', $data);
 	}
-	
+
 	public function privacy_policy()
 	{
 
-		$data['header']=$this->Front_model->get_header();
+		$data['header'] = $this->Front_model->get_header();
 
-		$data['footer']=$this->Front_model->get_footer();
-		$data['social']=$this->Front_model->get_social();
-		$data['privacy']=$this->Front_model->get_privacy();
-        $data['services']=$this->Front_model->get_services();
+		$data['footer'] = $this->Front_model->get_footer();
+		$data['social'] = $this->Front_model->get_social();
+		$data['privacy'] = $this->Front_model->get_privacy();
+		$data['services'] = $this->Front_model->get_services();
 		$this->load->view('front/privacy-policy', $data);
 	}
-	
+
 	public function cancellation_policy()
 	{
 
-		$data['header']=$this->Front_model->get_header();
-		$data['footer']=$this->Front_model->get_footer();
-    	$data['services']=$this->Front_model->get_services();
-		$data['social']=$this->Front_model->get_social();
-		$data['cancellation']=$this->Front_model->get_cancellation();
+		$data['header'] = $this->Front_model->get_header();
+		$data['footer'] = $this->Front_model->get_footer();
+		$data['services'] = $this->Front_model->get_services();
+		$data['social'] = $this->Front_model->get_social();
+		$data['cancellation'] = $this->Front_model->get_cancellation();
 
 		$this->load->view('front/cancellation-policy', $data);
 	}
-	
-	
+
+
 	public function detail()
 	{
 
-		$data['header']=$this->Front_model->get_header();
-		$data['footer']=$this->Front_model->get_footer();
-    	$data['services']=$this->Front_model->get_services();
-		$data['social']=$this->Front_model->get_social();
-		$data['cancellation']=$this->Front_model->get_cancellation();
+		$data['header'] = $this->Front_model->get_header();
+		$data['footer'] = $this->Front_model->get_footer();
+		$data['services'] = $this->Front_model->get_services();
+		$data['social'] = $this->Front_model->get_social();
+		$data['cancellation'] = $this->Front_model->get_cancellation();
 
 		$this->load->view('front/detail', $data);
 	}
-	public function proceed_to_payment(){
-		$id= $this->session->userdata('appoint_id');		
+	public function proceed_to_payment()
+	{
+		$id = $this->session->userdata('appoint_id');
 		$data['user'] = $this->Front_model->get_appoint($id);
-		$data['services']=$this->Front_model->get_services();
-		$data['header']=$this->Front_model->get_header();
-		$data['footer']=$this->Front_model->get_footer();
-		$data['social']=$this->Front_model->get_social();
-		$this->load->view('front/detail',$data);
+		$data['services'] = $this->Front_model->get_services();
+		$data['header'] = $this->Front_model->get_header();
+		$data['footer'] = $this->Front_model->get_footer();
+		$data['social'] = $this->Front_model->get_social();
+		$this->load->view('front/detail', $data);
 	}
 	public function add_payment_detail()
-	{	
-		
-		$data=array(
-			"appointment_id"=>$this->input->post("appoint_id"),
-			"transaction_id"=>$this->input->post("txnid"),
-			"hash"=>$this->input->post("hash"),
-			"service_provider"=>$this->input->post("service_provider"),
-			"amount"=>$this->input->post("amount"),
+	{
+
+		$data = array(
+			"appointment_id" => $this->input->post("appoint_id"),
+			"transaction_id" => $this->input->post("txnid"),
+			"hash" => $this->input->post("hash"),
+			"service_provider" => $this->input->post("service_provider"),
+			"amount" => $this->input->post("amount"),
 		);
-		$result=$this->Front_model->insert_payment($data);
-		if($result){
+		$result = $this->Front_model->insert_payment($data);
+		if ($result) {
 			$id = $this->db->insert_id();
-			$this->session->set_userdata("payment_id",$id);
-		echo  1;	
-		}
-		else{
-		echo  0;	
+			$this->session->set_userdata("payment_id", $id);
+			echo 1;
+		} else {
+			echo 0;
 		}
 	}
 	public function success()
 	{
-		$id= $this->session->userdata('payment_id');
-		$data = array("status"=>"Success");
+		$id = $this->session->userdata('payment_id');
+		$data = array("status" => "Success");
 		$this->db->where("id", $id);
-		$this->db->update("payment_online",$data);
+		$this->db->update("payment_online", $data);
 		$data['payment'] = $this->Front_model->get_payment($id);
-		$appoint_id =$data['payment'][0]->appointment_id;
-		$timeslot_id =$data['payment'][0]->timeslot_id;
-		$data = array("payment_status"=>"Success");
+		$appoint_id = $data['payment'][0]->appointment_id;
+		$timeslot_id = $data['payment'][0]->timeslot_id;
+		$data = array("payment_status" => "Success");
 		$this->Front_model->update_appointment($data, $appoint_id);
 
-		$data = array("status"=>"Booked", "booking_id"=>$appoint_id);
+		$data = array("status" => "Booked", "booking_id" => $appoint_id);
 		$this->Front_model->update_timeslot($data, $timeslot_id);
-		$data['services']=$this->Front_model->get_services();
-		$data['header']=$this->Front_model->get_header();
-		$data['footer']=$this->Front_model->get_footer();
-		$data['social']=$this->Front_model->get_social();
+		$data['services'] = $this->Front_model->get_services();
+		$data['header'] = $this->Front_model->get_header();
+		$data['footer'] = $this->Front_model->get_footer();
+		$data['social'] = $this->Front_model->get_social();
 		$data['payment'] = $this->Front_model->get_payment($id);
-		$this->load->view('front/success',$data);
+		$this->load->view('front/success', $data);
 	}
 	public function failure()
 	{
-	    $id= $this->session->userdata('payment_id');
-		$data = array("status"=>"Failed");
+		$id = $this->session->userdata('payment_id');
+		$data = array("status" => "Failed");
 		$this->db->where("id", $id);
-		$this->db->update("payment_online",$data);
+		$this->db->update("payment_online", $data);
 		$data['payment'] = $this->Front_model->get_payment($id);
-		$appoint_id =$data['payment'][0]->appointment_id;
-		$data = array("payment_status"=>"Failed");
+		$appoint_id = $data['payment'][0]->appointment_id;
+		$data = array("payment_status" => "Failed");
 		$this->Front_model->update_appointment($data, $appoint_id);
-		$data['services']=$this->Front_model->get_services();
-		$data['header']=$this->Front_model->get_header();
-		$data['footer']=$this->Front_model->get_footer();
-		$data['social']=$this->Front_model->get_social();
+		$data['services'] = $this->Front_model->get_services();
+		$data['header'] = $this->Front_model->get_header();
+		$data['footer'] = $this->Front_model->get_footer();
+		$data['social'] = $this->Front_model->get_social();
 		$data['payment'] = $this->Front_model->get_payment($id);
-		$this->load->view('front/failure',$data);
+		$this->load->view('front/failure', $data);
 	}
 
 }

@@ -105,177 +105,114 @@
 
 <section class="package-section">
   <div class="container">
-     <div class="section-heading text-center mb-4">
-  <h2>Choose the Right Counselling Package</h2>
-  <p>Flexible session plans designed to support your emotional well-being.</p>
-</div>
 
+    <div class="section-heading text-center mb-4">
+      <h2>Choose the Right Counselling Package</h2>
+      <p>Flexible session plans designed to support your emotional well-being.</p>
+    </div>
 
     <div class="row package-row">
 
-      <!-- Card 1 -->
+      <?php
+      if (!empty($packages)) {
+        $bg = ['pkg-bg-1', 'pkg-bg-2', 'pkg-bg-3', 'pkg-bg-4'];
+        $i = 0;
+
+        foreach ($packages as $pkg) {
+          $features = $this->Front_model->get_package_features($pkg->id);
+
+          $symbol = ($pkg->price_type == 'USD') ? '$' : '₹';
+      ?>
+
       <div class="col-lg-3 col-md-6 col-sm-12">
-        <div class="package-card pkg-bg-1">
+        <div class="package-card <?= $bg[$i % 4] ?>">
+
           <div class="package-img">
-            <img src="<?= base_url() ?>assets/images/profile/demo-image.jpeg" alt="">
+            <?php if ($pkg->image) { ?>
+              <img src="<?= base_url().$pkg->image ?>" alt="<?= $pkg->name ?>">
+            <?php } ?>
           </div>
 
-          <h5>Explore Therapy</h5>
-          <p class="package-session">1 Session</p>
-          <p class="package-price">₹ 1200</p>
+          <h5><?= $pkg->name ?></h5>
 
-          <ul>
-            <li>Pour your heart out</li>
-            <li>Build rapport with psychologist</li>
-            <li>Understand how therapy works</li>
-            <li>Validity: 1 Week</li>
-          </ul>
+          <p class="package-session"><?= $pkg->sessions ?> Session<?= $pkg->sessions > 1 ? 's' : '' ?></p>
 
-          <button class="package-btn" data-toggle="modal" data-target="#myModal">
+          <p class="package-price"><?= $symbol ?> <?= number_format($pkg->price) ?></p>
+
+          <?php if (!empty($features)) { ?>
+            <ul>
+              <?php foreach ($features as $f) { ?>
+                <li><?= $f->feature ?></li>
+              <?php } ?>
+            </ul>
+          <?php } ?>
+
+          <button class="package-btn"
+                  data-toggle="modal"
+                  data-target="#myModal"
+                  onclick="setPackage('<?= $pkg->id ?>','<?= $pkg->name ?>','<?= $pkg->category_name ?>')">
             I'm ready!
           </button>
+
         </div>
       </div>
 
-      <!-- Card 2 -->
-      <div class="col-lg-3 col-md-6 col-sm-12">
-        <div class="package-card pkg-bg-2">
-          <div class="package-img">
-            <img src="<?= base_url() ?>assets/images/profile/demo-image.jpeg" alt="">
-          </div>
-
-          <h5>Express Yourself</h5>
-          <p class="package-session">2 Sessions</p>
-          <p class="package-price">₹ 2200</p>
-
-          <ul>
-            <li>Discuss emotional concerns</li>
-            <li>Work on therapy plan</li>
-            <li>Set goals with psychologist</li>
-            <li>Validity: 3 Weeks</li>
-          </ul>
-
-          <button class="package-btn" data-toggle="modal" data-target="#myModal">
-            I'm ready!
-          </button>
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="col-lg-3 col-md-6 col-sm-12">
-        <div class="package-card pkg-bg-3">
-          <div class="package-img">
-            <img src="<?= base_url() ?>assets/images/profile/demo-image.jpeg" alt="">
-          </div>
-
-          <h5>Identify & Discuss<br>Emotional Concerns</h5>
-          <p class="package-session">5 Sessions</p>
-          <p class="package-price">₹ 4750</p>
-
-          <ul>
-            <li>Identify negative patterns</li>
-            <li>Work as a team</li>
-            <li>Set short-term goals</li>
-            <li>Validity: 3 Months</li>
-          </ul>
-
-          <button class="package-btn" data-toggle="modal" data-target="#myModal">
-            I'm ready!
-          </button>
-        </div>
-      </div>
-
-      <!-- Card 4 -->
-      <div class="col-lg-3 col-md-6 col-sm-12">
-        <div class="package-card pkg-bg-4">
-          <div class="package-img">
-            <img src="<?= base_url() ?>assets/images/profile/demo-image.jpeg" alt="">
-          </div>
-
-          <h5>Become a Better You</h5>
-          <p class="package-session">8 Sessions</p>
-          <p class="package-price">₹ 7200</p>
-
-          <ul>
-            <li>Self-exploration & analysis</li>
-            <li>Build healthier habits</li>
-            <li>Bring out the best in you</li>
-            <li>Validity: 4 Months</li>
-          </ul>
-
-          <button class="package-btn" data-toggle="modal" data-target="#myModal">
-            I'm ready!
-          </button>
-        </div>
-      </div>
+      <?php $i++; } } ?>
 
     </div>
   </div>
 </section>
-<!--<section class="doctor-section">-->
-<!--	<div class="container">-->
-<!--		<div class="row justify-content-center">-->
-<!--			<div class="col-sm-8">-->
-<!--				<div class="doctor">-->
-<!--					<div class="image">-->
-<!--						<img src="<?= base_url() ?>assets/images/profile/vidushi-full.jpg" alt="profile" class="img-fluid">-->
-<!--					</div>-->
-<!--					<div class="text">-->
-<!--						<div>-->
-<!--							<h5>Ms Vidushi Dixit</h5>-->
-
-						
-
-<!--							<strong>Counsellor</strong>-->
-						
-<!--						</div>-->
-<!--					</div>-->
-<!--					<div class="book">-->
-<!--						<div class="body">-->
-<!--							<h6>Consultation Fee</h6>-->
-<!--							<strong><i class="fas fa-rupee-sign"></i> <?= $fees[0]->fee ?></strong>-->
-<!--							<a href="#myModal" data-toggle="modal" class="book-btn">Request for Booking</a>-->
-<!--						</div>-->
-<!--					</div>-->
-<!--				</div>-->
-<!--			</div>-->
-<!--		</div>-->
-<!--	</div>-->
-<!--</section>-->
 
 
-
-<!--modal  -->
+<!-- MODAL -->
 <div class="modal" id="myModal">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<!-- Modal Header -->
-			<div class="modal-header modal-consult">
-				<h3>Consult Now</h3>
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-			</div>
+  <div class="modal-dialog">
+    <div class="modal-content">
 
-			<!-- Modal body -->
-			<div class="modal-body">
-				<form action="<?= base_url() ?>front/add_appointment" method="POST" enctype="multipart/form-data">
-					<div class="form-group row">
-						<div class="col-sm-6">
-							<label class="label-control">Name</label>
-							<input type="text" name="name" class="form-control" placeholder="Enter Name">
-							<input type="hidden" name="amount" value="<?= $fees[0]->fee ?>">
-						</div>
-						<div class="col-sm-6">
-							<label class="label-control">Email</label>
-							<input type="text" name="email" class="form-control" placeholder="Enter Email">
-							<input type="hidden" name="consult" value="consult" class="form-control">
-						</div>
-					</div>
-					<div class="form-group row">
-						<div class="col-sm-6">
+      <div class="modal-header modal-consult">
+        <h3>Consult Now</h3>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <form action="<?= base_url() ?>front/add_appointment" method="POST" enctype="multipart/form-data">
+
+          <input type="hidden" name="package_id" id="package_id" required>
+          <input type="hidden" name="package_name" id="package_name">
+          <input type="hidden" name="category_name" id="category_name">
+
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <label>Name</label>
+              <input type="text" name="name" class="form-control" placeholder="Enter Name" required>
+              <input type="hidden" name="consult" value="consult">
+            </div>
+
+            <div class="col-sm-6">
+              <label>Email</label>
+              <input type="email" name="email" class="form-control" placeholder="Enter Email" required>
+            </div>
+          </div>
+
+           <div class="form-group row">
+            	<div class="col-sm-6">
 							<label class="label-control">Mobile No.</label>
 							<input type="tel" name="mobile" class="form-control" placeholder="Enter Mobile No.">
 						</div>
-						<div class="col-sm-6">
+            <div class="col-sm-6">
+              <label>Package</label>
+              <input type="text" id="show_package_name" class="form-control" readonly>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <label>Category</label>
+              <input type="text" id="show_category_name" class="form-control" readonly>
+            </div>
+          </div>
+
+          	<!-- <div class="col-sm-6">
 							<label class="label-control">Select Service</label>
 							<select class="form-control" name="service" required>
 								<option value="">Select Service</option>
@@ -285,67 +222,77 @@
                                           <?php }}?>
                                          
                                     </select>
-						</div>
-					</div>
-                    <div class="form-group row">
-						<div class="col-sm-6">
-							<label> Date</label>
-							<select class="form-control" name="date" id="date">
-								<option value="">Select Date</option>
-                                <?php if(isset($dates) && !empty($dates)){
-                                          foreach($dates as $key){?>
-                                            <option value="<?php echo $key->date;?>"><?php echo $key->date;?> - <?php echo $key->days;?></option>
-                                          <?php }}?>
-                                      </select>
-						</div>
-						<div class="col-sm-6">
-							<label>Consultation Time</label>
-							<select class="form-control" name="timeslot" id="timing">
-								<option value="">Select Time</option>
-              
-                                      </select>
-						</div>
-					</div>
-					<div class="form-group row">
-						
-						<div class="col-sm-12">
-							<label>Document</label>
-							<input type="file" name="document" class="form-control">
-						</div>
-					</div>
-					<div class="form-group row">
-						<div class="col-sm-12">
-							<label class="label-control">Description</label>
-							<textarea rows="3" cols="6" name="description" class="form-control" placeholder="Description here"></textarea>
-						</div>
-					</div>
-					<div class="form-group row">
-						<div class="col-sm-12 text-center">
-							<button class="btn btn-vd" type="submit">Submit Now</button>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+						</div> -->
+
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <label>Date</label>
+              <select class="form-control" name="date" id="date" required>
+                <option value="">Select Date</option>
+                <?php if(isset($dates)) { foreach($dates as $key){ ?>
+                <option value="<?= $key->date ?>"><?= $key->date ?> - <?= $key->days ?></option>
+                <?php }} ?>
+              </select>
+            </div>
+
+            <div class="col-sm-6">
+              <label>Time</label>
+              <select class="form-control" name="timeslot" id="timing" required>
+                <option value="">Select Time</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Document <span style="color:red">*</span></label>
+            <input type="file" name="document" class="form-control" required>
+            <small class="text-muted">Upload related document (JPG, PNG, PDF, DOC).</small>
+          </div>
+
+          <div class="form-group">
+            <label>Description</label>
+            <textarea rows="3" name="description" class="form-control" placeholder="Describe your concern" required></textarea>
+          </div>
+
+          <div class="form-group text-center">
+            <button class="btn btn-vd" type="submit">Submit Now</button>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
 </div>
 
-<?php include('footer.php');?>
-<script type="text/javascript">
-  $(document).ready(function(){
-    let baseurl= "<?= base_url(); ?>";
-    $("#date").change(function(){
-    	//alert("vxbfbfb");
-      var date = $('#date :selected').val();
-      $.ajax({
+
+<?php include('footer.php'); ?>
+
+
+<script>
+function setPackage(id,name,category){
+  document.getElementById('package_id').value = id;
+  document.getElementById('package_name').value = name;
+  document.getElementById('category_name').value = category;
+
+  document.getElementById('show_package_name').value = name;
+  document.getElementById('show_category_name').value = category;
+}
+</script>
+
+<script>
+$(document).ready(function(){
+  let baseurl= "<?= base_url(); ?>";
+  $("#date").change(function(){
+    var date = $('#date').val();
+    $.ajax({
        url: baseurl+"front/fetch_timeslot",
        type: "POST",
-       data: {"date":date},
-       success: function(result)
-       {
+       data: {date:date},
+       success: function(result){
          $("#timing").html(result);
        }
-     });
     });
-    });
+  });
+});
 </script>

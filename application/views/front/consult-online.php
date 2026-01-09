@@ -130,7 +130,48 @@ width: 100%;
   <div class="container">
     <div class="row justify-content-center doctor-card-row">
 
-      <!-- Card 1 -->
+      <?php
+      if (!empty($categories)) {
+        $bg = ['card-bg-1', 'card-bg-2', 'card-bg-3', 'card-bg-4'];
+        $i = 0;
+        foreach ($categories as $cat) {
+      ?>
+
+        <div class="col-lg-3 col-md-6 col-sm-12">
+          <div class="doctor-card <?= $bg[$i % 4] ?>">
+
+            <div class="doctor-image">
+              <?php if (!empty($cat->image)) { ?>
+                <img src="<?= base_url() . $cat->image ?>" alt="<?= $cat->name ?>">
+              <?php } ?>
+            </div>
+
+            <h5><?= $cat->name ?></h5>
+
+            <a href="<?= base_url('consult-details?category='.$cat->slug) ?>"
+   class="book-btn">
+   Book
+</a>
+
+
+          </div>
+        </div>
+
+      <?php
+          $i++;
+        }
+      }
+      ?>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- <section class="doctor-section">
+  <div class="container">
+    <div class="row justify-content-center doctor-card-row">
+
       <div class="col-lg-3 col-md-6 col-sm-12">
         <div class="doctor-card card-bg-1">
           <div class="doctor-image">
@@ -141,7 +182,6 @@ width: 100%;
         </div>
       </div>
 
-      <!-- Card 2 -->
       <div class="col-lg-3 col-md-6 col-sm-12">
         <div class="doctor-card card-bg-2">
           <div class="doctor-image">
@@ -152,7 +192,6 @@ width: 100%;
         </div>
       </div>
 
-      <!-- Card 3 -->
       <div class="col-lg-3 col-md-6 col-sm-12">
         <div class="doctor-card card-bg-3">
           <div class="doctor-image">
@@ -163,7 +202,6 @@ width: 100%;
         </div>
       </div>
 
-      <!-- Card 4 -->
       <div class="col-lg-3 col-md-6 col-sm-12">
         <div class="doctor-card card-bg-4">
           <div class="doctor-image">
@@ -176,7 +214,7 @@ width: 100%;
 
     </div>
   </div>
-</section>
+</section> -->
 
 <!--modal  -->
 <div class="modal" id="myModal">
