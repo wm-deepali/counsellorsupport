@@ -69,11 +69,14 @@ width: 100%;
 
 <section class="consult-page-section">
 	<div class="container">
-	    <?php if($this->session->flashdata('errors')) { ?>
-            <div class="alert alert-danger">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                <?php echo $this->session->flashdata('errors'); ?>
-                </div><?php }  ?>
+<?php if ($msg = $this->session->flashdata('errors')) { ?>
+    <div class="alert alert-danger alert-dismissible fade show">
+        <?= $msg; ?>
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    <?php $this->session->unset_userdata('errors'); ?>
+<?php } ?>
+
 		<div class="row">
 			<div class="col-sm-2">
 				<div class="guid">

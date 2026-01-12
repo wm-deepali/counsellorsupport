@@ -60,7 +60,7 @@ class Admin extends CI_Controller
 			$password = xss_clean($this->input->post("password"));
 
 			$result = $this->Admin_model->get_admin_info($email, $password);
- 
+
 			if ($result == 1) {
 
 				$details = $this->Admin_model->get_admin_detail_by_email($this->input->post("email"));
@@ -742,29 +742,26 @@ class Admin extends CI_Controller
 
 	public function update_social_setting()
 	{
-
 		$data = array(
 
 			"fb" => $this->input->post("fb"),
-
 			"fb_link" => $this->input->post("fb_link"),
 
 			"twitter" => $this->input->post("twitter"),
-
 			"twitter_link" => $this->input->post("twitter_link"),
 
 			"utube" => $this->input->post("utube"),
-
 			"utube_link" => $this->input->post("utube_link"),
 
 			"insta" => $this->input->post("insta"),
-
 			"insta_link" => $this->input->post("insta_link"),
 
 			"linkedin" => $this->input->post("linked"),
-
 			"linkedin_link" => $this->input->post("linked_link"),
 
+			// 🟢 NEW WhatsApp icon + link
+			"whatsapp" => $this->input->post("whatsapp"),
+			"whatsapp_link" => $this->input->post("whatsapp_link"),
 		);
 
 		$about_us = $this->Admin_model->get_social($data);
@@ -774,17 +771,9 @@ class Admin extends CI_Controller
 			$return = $this->Admin_model->add_social($data);
 
 			if ($return) {
-
 				$this->session->set_flashdata("succ_msg", "Add Successfull");
-
-				redirect('Admin/social_setting', 'refresh');
-
 			} else {
-
 				$this->session->set_flashdata("err_msg", "Add Failed");
-
-				redirect('Admin/social_setting', 'refresh');
-
 			}
 
 		} else {
@@ -792,24 +781,15 @@ class Admin extends CI_Controller
 			$return = $this->Admin_model->update_social($data);
 
 			if ($return) {
-
 				$this->session->set_flashdata("succ_msg", "Update Successfull");
-
-				redirect('Admin/social_setting', 'refresh');
-
 			} else {
-
 				$this->session->set_flashdata("err_msg", "Update Failed");
-
-				redirect('Admin/social_setting', 'refresh');
-
 			}
-
 		}
 
-
-
+		redirect('Admin/social_setting', 'refresh');
 	}
+
 
 	public function home_page_content()
 	{

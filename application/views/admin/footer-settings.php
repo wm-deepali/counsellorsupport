@@ -32,7 +32,7 @@
                                             <div class="col-sm-6">
                                                 <label class="label label-control">Footer Image</label>
                                                 <input type="file" name="image" class="text-control">
-												<img src="<?= base_url()?><?= $footer[0]->logo ?>" class="img-fluid" style="height: 40px;">
+												<img src="<?= base_url()?><?= $footer[0]->image ?>" class="img-fluid" style="height: 40px;">
                                             </div>
                                             <div class="col-sm-6">
                                                 <label class="label label-control">Popup Image</label>
@@ -44,7 +44,7 @@
                                             <div class="col-sm-6">
                                                 <label class="label label-control">Logo</label>
                                                 <input type="file" name="logo" class="text-control">
-												<img src="<?= base_url()?><?= $footer[0]->image ?>" class="img-fluid" style="height: 40px;">
+												<img src="<?= base_url()?><?= $footer[0]->logo ?>" class="img-fluid" style="height: 40px;">
                                             </div>
                                             <div class="col-sm-6">
                                                 <label class="label label-control">Logo Link</label>

@@ -488,275 +488,212 @@ class Front extends CI_Controller
 
 	}
 
-
 	public function add_appointment()
 	{
 		$this->form_validation->set_rules("name", "Name", "required");
-		
 		$this->form_validation->set_rules("mobile", "Contact Number", "required");
-		
-		$this->form_validation->set_rules("email", "Email", "trim|required|valid_email");
-		
+		$this->form_validation->set_rules("email", "Email", "trim|valid_email");
 		$this->form_validation->set_rules("package_id", "Package", "required|integer");
-		
-		
+
 		if ($this->form_validation->run()) {
-			
-			
-			
+
 			$package_id = $this->input->post('package_id');
 			$package = $this->Front_model->get_package_by_id($package_id);
-			
+
 			if (!$package) {
 				$this->session->set_flashdata('errors', 'Invalid package selected');
 				redirect('consult-online', 'refresh');
 			}
-			
-			$data = array(
+
+			$data = [
 				"name" => $this->input->post("name"),
 				"email" => $this->input->post("email"),
 				"mobile" => $this->input->post("mobile"),
-				// "service_id" => $this->input->post("service"),
 				"timeslot_id" => $this->input->post("timeslot"),
 				"description" => $this->input->post("description"),
 				"package_id" => $package_id,
-				"amount" => $package->price,   // 🔒 SAFE
+				"amount" => $package->price,
 				"payment_proceed" => "No",
 				"payment_status" => "Pending",
 				"appoint_type" => "online"
-			);
-			
+			];
+
 			if (!empty($_FILES["document"]["name"])) {
-				
+
 				$path = './uploads/document/';
-				
 				$thumb_path = './uploads/document/thumb/';
-				
 				$height = 500;
-				
 				$width = 500;
-				
-				if (!is_dir('uploads/document')) {
-					
-					mkdir('./uploads/document', 0777, TRUE);
-					
-					mkdir('./uploads/document/thumb', 0777, TRUE);
-					
-				}
-				
+
+				if (!is_dir($path))
+					mkdir($path, 0777, TRUE);
+				if (!is_dir($thumb_path))
+					mkdir($thumb_path, 0777, TRUE);
+
 				$new_name = str_replace(" ", "", 'contact' . time() . $_FILES['document']['name']);
-				
+
 				$_FILES['file']['name'] = $new_name;
-
 				$_FILES['file']['type'] = $_FILES['document']['type'];
-
 				$_FILES['file']['tmp_name'] = $_FILES['document']['tmp_name'];
-				
 				$_FILES['file']['error'] = $_FILES['document']['error'];
-				
 				$_FILES['file']['size'] = $_FILES['document']['size'];
-				
+
 				$config['upload_path'] = $path;
-				
 				$config['allowed_types'] = 'jpg|jpeg|png|pdf|doc|docx';
-				
+				$config['max_size'] = 20480; // 20MB
+				$config['detect_mime'] = TRUE;
+				$config['file_ext_tolower'] = TRUE;
+
 				$this->load->library('upload', $config);
-				
 				$this->upload->initialize($config);
-				
+
 				if ($this->upload->do_upload('file')) {
-					
+
 					$data['image'] = $path . $new_name;
-					
 					$this->resizeImage($new_name, $path, $thumb_path, $height, $width);
-					
 					$data['image_thumb'] = $thumb_path . $new_name;
-					
+
 				} else {
-					
 					$this->session->set_flashdata('errors', $this->upload->display_errors());
-					
 					redirect('consult-online', 'refresh');
-					
 				}
-				
 			}
 
-			// echo'<pre>';print_r($data);echo'</pre>';exit;
 			$return = $this->Front_model->insert_appointment($data);
-			
+
 			if ($return) {
 				$id = $this->db->insert_id();
 				$this->session->set_userdata("appoint_id", $id);
 				redirect('front/proceed_to_payment', 'refresh');
-
 			} else {
-
 				$this->session->set_flashdata("errors", "Add Failed");
 				redirect('consult-online', 'refresh');
 			}
 
 		} else {
-
 			$this->session->set_flashdata('errors', validation_errors());
-
 			redirect('consult-online', 'refresh');
-
 		}
-
 	}
 
 	public function insert_appointment()
 	{
-
 		$this->form_validation->set_rules("name", "Name", "required");
-
 		$this->form_validation->set_rules("mobile", "Contact Number", "required");
-
-		$this->form_validation->set_rules("email", "Email", "trim|required|valid_email");
+		$this->form_validation->set_rules("email", "Email", "trim|valid_email");
 
 		if ($this->form_validation->run()) {
 
-
-
-			$data = array(
-
+			$data = [
 				"amount" => $this->input->post("amount"),
-
 				"name" => $this->input->post("name"),
-
 				"email" => $this->input->post("email"),
-
 				"mobile" => $this->input->post("mobile"),
-
-				// "service_id" => $this->input->post("service"),
-
 				"timeslot_id" => $this->input->post("timeslot"),
-
 				"description" => $this->input->post("description"),
 				"appoint_type" => "visit us"
-
-			);
+			];
 
 			if (!empty($_FILES["document"]["name"])) {
 
 				$path = './uploads/document/';
-
 				$thumb_path = './uploads/document/thumb/';
-
 				$height = 500;
-
 				$width = 500;
 
-				if (!is_dir('uploads/document')) {
-
-					mkdir('./uploads/document', 0777, TRUE);
-
-					mkdir('./uploads/document/thumb', 0777, TRUE);
-
-				}
+				if (!is_dir($path))
+					mkdir($path, 0777, TRUE);
+				if (!is_dir($thumb_path))
+					mkdir($thumb_path, 0777, TRUE);
 
 				$new_name = str_replace(" ", "", 'contact' . time() . $_FILES['document']['name']);
 
 				$_FILES['file']['name'] = $new_name;
-
 				$_FILES['file']['type'] = $_FILES['document']['type'];
-
 				$_FILES['file']['tmp_name'] = $_FILES['document']['tmp_name'];
-
 				$_FILES['file']['error'] = $_FILES['document']['error'];
-
 				$_FILES['file']['size'] = $_FILES['document']['size'];
 
 				$config['upload_path'] = $path;
-
 				$config['allowed_types'] = 'jpg|jpeg|png|pdf|doc|docx';
+				$config['max_size'] = 20480; // 20MB
+				$config['detect_mime'] = TRUE;
+				$config['file_ext_tolower'] = TRUE;
 
 				$this->load->library('upload', $config);
-
 				$this->upload->initialize($config);
 
 				if ($this->upload->do_upload('file')) {
 
 					$data['image'] = $path . $new_name;
-
 					$this->resizeImage($new_name, $path, $thumb_path, $height, $width);
-
 					$data['image_thumb'] = $thumb_path . $new_name;
 
 				} else {
-
 					$this->session->set_flashdata('errors', $this->upload->display_errors());
-
 					redirect('appointment', 'refresh');
-
 				}
-
 			}
 
 			$return = $this->Front_model->insert_appointment($data);
 
 			if ($return) {
-
 				$this->session->set_flashdata("success", "Add Successfull");
-
 				redirect('appointment', 'refresh');
-
-
 			} else {
 				$this->session->set_flashdata("errors", "Add Failed");
 				redirect('appointment', 'refresh');
 			}
-		} else {
 
+		} else {
 			$this->session->set_flashdata('errors', validation_errors());
 			redirect('appointment', 'refresh');
 		}
-
 	}
 
 
+
 	public function mark_whatsapp_payment()
-{
-	$appoint_id = $this->input->post("appoint_id");
-	
-    if (!$appoint_id) {
-		echo 0;
-        return;
-    }
-	
-    // 1️⃣ Get appointment amount securely
-    $appointment = $this->db
-	->select('amount')
-	->where('id', $appoint_id)
-	->get('appointment')
-	->row();
-	
-    if (!$appointment) {
-		echo 0;
-        return;
-    }
-	
-    $amount = $appointment->amount;
-	
-    // 2️⃣ Insert payment entry (WhatsApp)
-    $data = array(
-        "appointment_id"   => $appoint_id,
-        "transaction_id"   => NULL,
-        "hash"             => NULL,
-        "service_provider" => "WhatsApp",
-        "amount"           => $amount,
-        "status"           => "Pending",
-        "added_on"         => date('Y-m-d H:i:s')
-    );
-	
-    $result = $this->Front_model->insert_payment($data);
-    if ($result) {		
-        echo 1;
-    } else {
-        echo 0;
-    }
-}
+	{
+		$appoint_id = $this->input->post("appoint_id");
+
+		if (!$appoint_id) {
+			echo 0;
+			return;
+		}
+
+		// 1️⃣ Get appointment amount securely
+		$appointment = $this->db
+			->select('amount')
+			->where('id', $appoint_id)
+			->get('appointment')
+			->row();
+
+		if (!$appointment) {
+			echo 0;
+			return;
+		}
+
+		$amount = $appointment->amount;
+
+		// 2️⃣ Insert payment entry (WhatsApp)
+		$data = array(
+			"appointment_id" => $appoint_id,
+			"transaction_id" => NULL,
+			"hash" => NULL,
+			"service_provider" => "WhatsApp",
+			"amount" => $amount,
+			"status" => "Pending",
+			"added_on" => date('Y-m-d H:i:s')
+		);
+
+		$result = $this->Front_model->insert_payment($data);
+		if ($result) {
+			echo 1;
+		} else {
+			echo 0;
+		}
+	}
 
 	public function disclaimer()
 	{

@@ -25,18 +25,23 @@
 							<form action="<?= base_url()?>admin/about_us" method="POST" enctype="multipart/form-data">
 							<h4 class="form-section-h">Post Details</h4>
 							<div class="form-group row">
-								<div class="col-sm-4">
+								<div class="col-sm-6">
 									<label class="label-control">Title </label>
 									<input type="text" name="title" value="<?= $about_us[0]->title ?>" class="text-control" placeholder="Enter Title">
 								</div>
-								<div class="col-sm-4">
+								<div class="col-sm-6">
 									<label class="label-control">Image 01</label>
-									<input type="file" name="image1" class="text-control">
+<?php if (!empty($about_us[0]->image1)) { ?>
+  <img src="<?= base_url() . $about_us[0]->image1 ?>" 
+       style="width:120px; display:block; margin-bottom:8px; border:1px solid #ddd;">
+<?php } ?>
+<input type="file" name="image1" class="text-control" accept=".jpg,.jpeg,.png,.gif">
+
 								</div>
-								<div class="col-sm-4">
+								<!-- <div class="col-sm-4">
 									<label class="label-control">Image 02</label>
 									<input type="file" name="image2" class="text-control">
-								</div>
+								</div> -->
 							</div>
 							<div class="form-group row">
 								<div class="col-sm-12">

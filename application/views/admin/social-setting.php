@@ -79,6 +79,17 @@
                                         <input type="text" name="insta_link" class="text-control" placeholder="Enter Instagram URL" value="<?= $social[0]->insta_link ?>">
                                     </div>
                                 </div>
+                                <div class="form-group row">
+    <div class="col-sm-6">
+        <label class="label-control">Social-6 (WhatsApp) <span class="required">*</span></label>
+        <input type="text" name="whatsapp" class="text-control" placeholder="Enter WhatsApp Icon" value="<?= $social[0]->whatsapp ?>">
+    </div>
+    <div class="col-sm-6">
+        <label class="label-control">Social-6 Link <span class="required">*</span></label>
+        <input type="text" name="whatsapp_link" class="text-control" placeholder="Enter WhatsApp URL" value="<?= $social[0]->whatsapp_link ?>">
+    </div>
+</div>
+
                                         </div>
                                         <button class="btn btn-dark btn-save" type="submit"><i class="fas fa-plus"></i> Update Settings</button>
                                     </div>
